@@ -34,8 +34,9 @@ colour of the text in divisions
 # Build Instructions
 
 Create a Visual Studio solution for the PRImageGenerator, and include the source 
-files included in pr_image_generator.  In the executable directory (bin/Debug or 
-/bin/Release), copy the images/ folder, as well as config.xml.
+files included in pr_image_generator.  In the executable directory, copy over the 
+contents of /bin.  In other words, if your built executable appears in bin/Release, 
+you should have bin/Release/images/ and bin/Release/config.xml.
 
 
 # Preparing the .csv
