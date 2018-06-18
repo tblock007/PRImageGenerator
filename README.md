@@ -33,10 +33,14 @@ colour of the text in divisions
 
 # Build Instructions
 
-Create a Visual Studio solution for the PRImageGenerator, and include the source 
+Create a Visual Studio solution pr_image_generator, and include the source 
 files included in pr_image_generator.  In the executable directory, copy over the 
 contents of /bin.  In other words, if your built executable appears in bin/Release, 
 you should have bin/Release/images/ and bin/Release/config.xml.
+
+In the main form designer window, select the main window and set the Icon property to 
+smash.ico included in the repository.  In the Project Properties Application tab, set 
+the icon to smash.ico as well.
 
 
 # Preparing the .csv
