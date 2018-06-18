@@ -1149,7 +1149,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "mainWindow";
-            this.Text = "SSBU - PR Image Generator v3.0";
+            this.Text = "SSBU - PR Image Generator v2.1.1";
             this.tabControl1.ResumeLayout(false);
             this.tabHeader.ResumeLayout(false);
             this.tabHeader.PerformLayout();
