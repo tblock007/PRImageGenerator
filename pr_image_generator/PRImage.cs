@@ -105,10 +105,7 @@ namespace pr_image_generator
         }
         #endregion
 
-
-
-
-
+        
 
 
 
@@ -121,31 +118,55 @@ namespace pr_image_generator
          * 
          ****************************************************************************/
 
+        /// <summary>
+        /// Sets the game.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void setGame(string input)
         {
             game = input;
         }
 
+        /// <summary>
+        /// Sets the icon set.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void setIconSet(string input)
         {
             iconSet = input;
         }
 
+        /// <summary>
+        /// Sets the region.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void setRegion(string input)
         {
             region = input;
         }
 
+        /// <summary>
+        /// Sets the date.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void setDate(string input)
         {
             date = input;
         }
 
+        /// <summary>
+        /// Sets the header image path.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void setHeaderImagePath(string input)
         {
             headerImagePath = input;
         }
 
+        /// <summary>
+        /// Sets the CSV path.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void setCsvPath(string input)
         {
             if (csvPath != input)
@@ -162,6 +183,10 @@ namespace pr_image_generator
             }
         }
 
+        /// <summary>
+        /// Sets the previous CSV path.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void setPrevCsvPath(string input)
         {
             if (prevCsvPath != input)
@@ -174,6 +199,10 @@ namespace pr_image_generator
             }
         }
 
+        /// <summary>
+        /// Sets the character map path.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void setCharMapPath(string input)
         {
             if (charMapPath != input)
@@ -186,6 +215,10 @@ namespace pr_image_generator
             }
         }
 
+        /// <summary>
+        /// Sets the exclusion list path.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void setExclusionListPath(string input)
         {
             if (exclusionListPath != input)
@@ -202,6 +235,91 @@ namespace pr_image_generator
             }
         }
 
+        /// <summary>
+        /// Sets the main text brush.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        public void setMainTextBrush(Color input)
+        {
+            mainTextBrush.Color = input;
+            diffBrush.Color = input; //diffBrush shares the same colour as mainTextBrush for now
+        }
+
+        /// <summary>
+        /// Sets the header text brush.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        public void setHeaderTextBrush(Color input)
+        {
+            headerTextBrush.Color = input;
+        }
+
+        /// <summary>
+        /// Sets the region name brush.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        public void setRegionNameBrush(Color input)
+        {
+            regionNameBrush.Color = input;
+        }
+
+        /// <summary>
+        /// Sets the game name brush.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        public void setGameNameBrush(Color input)
+        {
+            gameNameBrush.Color = input;
+        }
+
+        /// <summary>
+        /// Sets the line1 brush.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        public void setLine1Brush(Color input)
+        {
+            line1Brush.Color = input;
+        }
+
+        /// <summary>
+        /// Sets the line2 brush.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        public void setLine2Brush(Color input)
+        {
+            line2Brush.Color = input;
+        }
+
+        /// <summary>
+        /// Sets the plus brush.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        public void setPlusBrush(Color input)
+        {
+            plusBrush.Color = input;
+        }
+
+        /// <summary>
+        /// Sets the minus brush.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        public void setMinusBrush(Color input)
+        {
+            minusBrush.Color = input;
+        }
+
+        #endregion
+
+
+
+
+
+        #region DIVISIONS
+
+        /// <summary>
+        /// Adds a division to divisionsList
+        /// </summary>
+        /// <param name="input">Array of division parameters to be added.</param>
         public void addDivision(string[] input)
         {
             //create local copy of input so that we are sure to insert string values and not the reference to the array
@@ -224,56 +342,16 @@ namespace pr_image_generator
             divisionsList.Insert(index, local);
         }
 
+        /// <summary>
+        /// Removes the division at a specified index from the divisionsList
+        /// </summary>
+        /// <param name="index">The index of the division to be removed.</param>
         public void removeDivision(int index)
         {
             divisionsList.RemoveAt(index);
         }
 
-        public void setMainTextBrush(Color input)
-        {
-            mainTextBrush.Color = input;
-            diffBrush.Color = input; //diffBrush shares the same colour as mainTextBrush for now
-        }
-
-        public void setHeaderTextBrush(Color input)
-        {
-            headerTextBrush.Color = input;
-        }
-
-        public void setRegionNameBrush(Color input)
-        {
-            regionNameBrush.Color = input;
-        }
-
-        public void setGameNameBrush(Color input)
-        {
-            gameNameBrush.Color = input;
-        }
-
-        public void setLine1Brush(Color input)
-        {
-            line1Brush.Color = input;
-        }
-
-        public void setLine2Brush(Color input)
-        {
-            line2Brush.Color = input;
-        }
-
-        public void setPlusBrush(Color input)
-        {
-            plusBrush.Color = input;
-        }
-
-        public void setMinusBrush(Color input)
-        {
-            minusBrush.Color = input;
-        }
-
         #endregion
-
-
-
 
 
 
@@ -283,14 +361,17 @@ namespace pr_image_generator
         /**************************************************************************** 
          ***************************** PARSE METHODS ********************************
          *
-         * -Parse methods to read input files and populate the lists/maps of the class         * 
+         * -Parse methods to read input files and populate the lists/maps of the class      
          * -These functions take whatever is stored in the path variables; they are 
          *   called by the setter functions to automatically update the appropriate 
          *   player maps and arrays
          * 
          ****************************************************************************/
-        // 
 
+
+        /// <summary>
+        /// Parses the CSV that specifies the data to be displayed on the image.
+        /// </summary>
         private void parseCsv()
         {
             string path = csvPath;
@@ -393,9 +474,13 @@ namespace pr_image_generator
                 scoreList.Add(Int32.Parse(score));
             }
             reader.Close();
-
         }
 
+
+
+        /// <summary>
+        /// Parses the CSV that specifies the previous data, which is used to compute ELO differences
+        /// </summary>
         private void parsePrevCsv()
         {
             string path = prevCsvPath;
@@ -498,6 +583,12 @@ namespace pr_image_generator
             reader.Close();
         }
 
+
+
+
+        /// <summary>
+        /// Parses the CSV which represents the character map.
+        /// </summary>
         private void parseCharMap()
         {
             string path = charMapPath;
@@ -534,6 +625,12 @@ namespace pr_image_generator
             reader.Close();
         }
 
+
+
+
+        /// <summary>
+        /// Parses the CSV that represents the player exclusion list.
+        /// </summary>
         private void parseExclusionList()
         {
             string path = exclusionListPath;
@@ -569,8 +666,6 @@ namespace pr_image_generator
 
 
 
-
-
         #region DRAWING-UPDATING
         /**************************************************************************** 
          *********************** DRAWING-UPDATING METHODS ***************************
@@ -583,6 +678,10 @@ namespace pr_image_generator
          * 
          ****************************************************************************/
 
+        /// <summary>
+        /// Produces the actual image that can be saved.
+        /// </summary>
+        /// <returns>The resulting image.</returns>
         public Image drawPR()
         {
             //create image
@@ -750,7 +849,12 @@ namespace pr_image_generator
             return (Image) bmap;
         }
 
-        
+
+
+        /// <summary>
+        /// Updates the previews in the UI.
+        /// </summary>
+        /// <param name="previews">The PictureBoxes to be updated with the preview.</param>
         public void updatePreview(PictureBox[] previews)
         {
             Image drawnPR = drawPR();
@@ -763,6 +867,13 @@ namespace pr_image_generator
         }
 
 
+
+        /// <summary>
+        /// Retrieves the character icon from the appropriate file.
+        /// </summary>
+        /// <param name="character">The character whose icon is to be retrieved.</param>
+        /// <param name="set">The set of icons from which to retrieve the icon.</param>
+        /// <returns>The icon image.</returns>
         private Image getIcon(string character, string set)
         {
             if (set == "Melee")
