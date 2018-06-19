@@ -10,22 +10,30 @@ namespace pr_image_generator
 {
     public partial class mainWindow : Form
     {
+        /// <summary>
+        /// Stores information about the image as configurations are made
+        /// </summary>
+        private PRImage pr;
+
+        /// <summary>
+        /// Stores the image previews for each tab
+        /// </summary>
+        private PictureBox[] tabPictureBoxes;
+
 
         #region INITIALIZATION
         /**************************************************************************** 
          ***************************** INITIALIZATION *******************************
          *
-         * -Added a state PRImage variable to store information as it is inputted 
-         * -tabPictureBoxes is an array of PictureBoxes that must be initialized to 
-         *   contain all preview PictureBoxes; this is passed to the updatePreview 
-         *   method of the PRImage class
-         * 
+         * -Methods associated with initialization of the program
+         *
          ****************************************************************************/
-        
-        private PRImage pr;
-        private PictureBox[] tabPictureBoxes;
-        
 
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="mainWindow"/> class.
+        /// </summary>
         public mainWindow()
         {
             InitializeComponent();
@@ -42,7 +50,7 @@ namespace pr_image_generator
         }
 
         #endregion
-          
+
 
 
 
@@ -56,9 +64,12 @@ namespace pr_image_generator
          * 
          ****************************************************************************/
 
-
-
-        //when the Game TextBox is updated, load divisions and colours for the game if present
+        
+        /// <summary>
+        /// Called when the Game TextBox is updated, load divisions and colours for the game if present  
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textGame_Leave(object sender, EventArgs e)
         {
             string convertedGameName = textGame.Text.ToLower().Replace(" ", string.Empty);
@@ -90,7 +101,7 @@ namespace pr_image_generator
                     string xpath = "/config/divisions[@game='" + convertedGameName + "']";
                     XmlNode divisions = config.DocumentElement.SelectSingleNode(xpath);
 
-                    //if code reaches this point, divisions preconfiguration was found, so delete current divisions and load
+                    // divisions preconfiguration was found, so delete current divisions and load
                     int divisionsCount = listViewDivisions.Items.Count;
                     for (int i = 0; i < divisionsCount; i = i + 1)
                     {
@@ -172,8 +183,12 @@ namespace pr_image_generator
 
         }
 
-
-        //when the Header Image TextBox is updated, update the header image preview
+ 
+        /// <summary>
+        /// Occurs when the Header Image TextBox is updated, update the header image preview 
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxHeaderImage_Leave(object sender, EventArgs e)
         {
             if (!File.Exists(textBoxHeaderImage.Text))
@@ -197,7 +212,12 @@ namespace pr_image_generator
         }
 
 
-        //open file dialog so that user can select a header image
+             
+        /// <summary>
+        /// Opens file dialog so that user can select a header image  
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonBrowseHeaderImage_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogCsv.ShowDialog();
@@ -218,7 +238,7 @@ namespace pr_image_generator
             }
         }
 
-    #endregion
+        #endregion
 
 
 
@@ -235,7 +255,12 @@ namespace pr_image_generator
 
 
 
-        //open file dialog so that user can select an input CSV file
+        
+        /// <summary>
+        /// Opens file dialog so that user can select an input CSV file  
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonBrowseCsv_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogCsv.ShowDialog();
@@ -257,7 +282,11 @@ namespace pr_image_generator
         }
 
 
-        //open file dialog so that user can select an input previous CSV file
+        /// <summary>
+        /// Opens file dialog so that user can select an input previous CSV file  
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonBrowsePrevCsv_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogCsv.ShowDialog();
@@ -278,7 +307,11 @@ namespace pr_image_generator
         }
 
 
-        //open file dialog so that user can select an exclusion list
+        /// <summary>
+        /// Opens file dialog so that user can select an input exclusion list file 
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonBrowseExclusionList_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogCsv.ShowDialog();
@@ -300,7 +333,11 @@ namespace pr_image_generator
         }
 
 
-        //open file dialog so that user can select a character map
+        /// <summary>
+        /// Opens file dialog so that user can select an input character map file 
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonBrowseCharMap_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogCsv.ShowDialog();
@@ -320,7 +357,7 @@ namespace pr_image_generator
             }
         }
 
-    
+
 
         #endregion
 
@@ -337,7 +374,12 @@ namespace pr_image_generator
          ****************************************************************************/
 
 
-        //save the current divisions in config.xml under the specified game
+        
+        /// <summary>
+        /// Saves the current divisions in config.xml under the specified game  
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonSaveDivisions_Click(object sender, EventArgs e)
         {
             if (textGame.Text == string.Empty)
@@ -431,7 +473,11 @@ namespace pr_image_generator
 
 
 
-        //load divisions for the game from config.xml
+        /// <summary>
+        /// Loads the current divisions from config.xml for the specified game  
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonLoadDivisions_Click(object sender, EventArgs e)
         {
             XmlDocument config = new XmlDocument();
@@ -442,7 +488,7 @@ namespace pr_image_generator
                 string xpath = "/config/divisions[@game='" + textGame.Text.ToLower().Replace(" ", string.Empty) + "']";
                 XmlNode divisions = config.DocumentElement.SelectSingleNode(xpath);
 
-                //if code reaches this point, divisions preconfiguration was found, so delete current divisions and load
+                // divisions preconfiguration was found, so delete current divisions and load
                 int divisionsCount = listViewDivisions.Items.Count;
                 for (int i = 0; i < divisionsCount; i = i + 1)
                 {
@@ -485,8 +531,12 @@ namespace pr_image_generator
         }
 
 
-
-        //update background colour of TextBox when a new value is entered
+    
+        /// <summary>
+        /// Updates the background colour of the Division Text textbox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxAddDivisionTextColour_Leave(object sender, EventArgs e)
         {
             try
@@ -506,7 +556,11 @@ namespace pr_image_generator
         }
 
 
-        //update background colour of TextBox when a new value is entered
+        /// <summary>
+        /// Updates the background colour of the Division Background Textbox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxAddDivisionBGColour_Leave(object sender, EventArgs e)
         {
             try
@@ -525,7 +579,12 @@ namespace pr_image_generator
         }
 
 
-        //open colour dialog so that user can select a colour
+        
+        /// <summary>
+        /// Opens colour dialog so that user can select a colour   
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonDivisionsTextColour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -538,7 +597,11 @@ namespace pr_image_generator
         }
 
 
-        //open colour dialog so that user can select a colour
+        /// <summary>
+        /// Opens colour dialog so that user can select a colour   
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonDivionsBGColour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -551,9 +614,13 @@ namespace pr_image_generator
         }
 
 
-
-        //take data from the four TextBoxes in this tab and add to the division list
-        //note that this method also updates the divisions in the PRImage class
+       
+        /// <summary>
+        /// Takes the data from the four TextBoxes in this tab and adds to the division list
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <remarks>Note that this method also updates the divisions in the PRImage class.</remarks>
         private void buttonAddDivision_Click(object sender, EventArgs e)
         {
             string[] fields = new string[4];
@@ -616,9 +683,14 @@ namespace pr_image_generator
             
         }
 
-        
-        //remove selected divisions from the list
-        //note that this method also updates the divisions being tracked in the PRImage class
+
+      
+        /// <summary>
+        /// Removes the selected divisions from the list
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <remarks>Note that this method also updates the divisions in the PRImage class.</remarks>
         private void buttonRemoveDivision_Click(object sender, EventArgs e)
         {
             int offset = 0;
@@ -634,8 +706,11 @@ namespace pr_image_generator
         }
 
 
-
-        // comparer implements IComparer so that we can sort by ELO when we add a division to the ListView
+      
+        /// <summary>
+        /// Auxiliary class used to enable sorting of divisions by ELO
+        /// </summary>
+        /// <seealso cref="System.Collections.IComparer" />
         class DivisionsELOComparer : IComparer
         {
             private int sortColumn;
@@ -675,7 +750,12 @@ namespace pr_image_generator
          ****************************************************************************/
 
 
-        //save current colours for the current game in config.xml
+         
+        /// <summary>
+        /// Saves current colours for the current game in config.xml  
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonSaveColours_Click(object sender, EventArgs e)
         {
             if (textGame.Text == string.Empty)
@@ -762,8 +842,12 @@ namespace pr_image_generator
         }
 
 
-
-        //load colours for the current game from config.xml
+        
+        /// <summary>
+        /// Loads current colours for the current game from config.xml  
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonLoadColours_Click(object sender, EventArgs e)
         {
             try
@@ -805,10 +889,15 @@ namespace pr_image_generator
                 MessageBox.Show("config.xml file not found in current directory.  Please obtain config.xml from program .zip");
             }
         }
-        
-        
 
-        //open colour dialog so user can select a colour
+
+
+        
+        /// <summary>
+        /// Opens colour dialog so user can select a colour for Main Text
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonMainTextColour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -822,9 +911,13 @@ namespace pr_image_generator
             }
 
         }
+        
 
-
-        //update background colour of the TextBox when a new value is entered
+        /// <summary>
+        /// Updates background colour of the Main Text TextBox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxMainTextColour_Leave(object sender, EventArgs e)
         {
             try
@@ -846,7 +939,12 @@ namespace pr_image_generator
         }
 
 
-        //open colour dialog so user can select a colour
+        
+        /// <summary>
+        /// Opens colour dialog so user can select a colour for Header Text
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonHeaderTextColour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -862,7 +960,11 @@ namespace pr_image_generator
         }
 
 
-        //update background colour of the TextBox when a new value is entered
+        /// <summary>
+        /// Updates background colour of the Header Text TextBox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxHeaderTextColour_Leave(object sender, EventArgs e)
         {
             try
@@ -883,8 +985,13 @@ namespace pr_image_generator
             pr.updatePreview(tabPictureBoxes);
         }
 
+        
 
-        //update background colour of the TextBox when a new value is entered
+        /// <summary>
+        /// Updates background colour of the Region Text TextBox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxRegionTextColour_Leave(object sender, EventArgs e)
         {
             try
@@ -906,7 +1013,11 @@ namespace pr_image_generator
         }
 
 
-        //open colour dialog so user can select a colour
+        /// <summary>
+        /// Opens colour dialog so user can select a colour for Region Text
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>        
         private void buttonRegionTextColour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -921,7 +1032,12 @@ namespace pr_image_generator
         }
 
 
-        //update background colour of the TextBox when a new value is entered
+        
+        /// <summary>
+        /// Updates background colour of the Game TextBox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxGameNameColour_Leave(object sender, EventArgs e)
         {
             try
@@ -943,7 +1059,11 @@ namespace pr_image_generator
         }
 
 
-        //open colour dialog so user can select a colour
+        /// <summary>
+        /// Opens colour dialog so user can select a colour for Game Text
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonGameNameColour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -957,8 +1077,13 @@ namespace pr_image_generator
             }
         }
 
+        
 
-        //update background colour of the TextBox when a new value is entered
+        /// <summary>
+        /// Updates background colour of the Line1 TextBox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxLine1Colour_Leave(object sender, EventArgs e)
         {
             try
@@ -980,7 +1105,11 @@ namespace pr_image_generator
         }
 
 
-        //open colour dialog so user can select a colour
+        /// <summary>
+        /// Opens colour dialog so user can select a colour for Line1 Text
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonLine1Colour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -993,9 +1122,13 @@ namespace pr_image_generator
                 pr.updatePreview(tabPictureBoxes);
             }
         }
+        
 
-
-        //update background colour of the TextBox when a new value is entered
+        /// <summary>
+        /// Updates background colour of the Line2 Text TextBox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxLine2Colour_Leave(object sender, EventArgs e)
         {
             try
@@ -1017,7 +1150,11 @@ namespace pr_image_generator
         }
 
 
-        //open colour dialog so user can select a colour
+        /// <summary>
+        /// Opens colour dialog so user can select a colour for Line2 Text
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonLine2Colour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -1031,8 +1168,12 @@ namespace pr_image_generator
             }
         }
 
-
-        //update background colour of the TextBox when a new value is entered
+        
+        /// <summary>
+        /// Updates background colour of the Plus Text TextBox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxPlusColour_Leave(object sender, EventArgs e)
         {
             try
@@ -1054,7 +1195,11 @@ namespace pr_image_generator
         }
 
 
-        //open colour dialog so user can select a colour
+        /// <summary>
+        /// Opens colour dialog so user can select a colour for Plus Text
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonPlusColour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -1068,8 +1213,13 @@ namespace pr_image_generator
             }
         }
 
+        
 
-        //update background colour of the TextBox when a new value is entered
+        /// <summary>
+        /// Updates background colour of the Minus TextBox when a new value is entered
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxMinusColour_Leave(object sender, EventArgs e)
         {
             try
@@ -1091,7 +1241,11 @@ namespace pr_image_generator
         }
 
 
-        //open colour dialog so user can select a colour
+        /// <summary>
+        /// Opens colour dialog so user can select a colour for Minus Text
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonMinusColour_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
@@ -1106,9 +1260,13 @@ namespace pr_image_generator
         }
 
 
-
-        //auxiliary method to help in loading colours from config.xml
-        //sets the background colour of a specified TextBox once the hex string for the colour is known
+    
+        /// <summary>
+        /// Auxiliary method to help loading colours from config.xml.  Also sets background colour of a specified 
+        /// TextBox once the hex string for the colour is known.
+        /// </summary>
+        /// <param name="t">The TextBox whose colour is to be set.</param>
+        /// <param name="colour">The string representation of the colour to be parsed.</param>
         private void setTextBoxColourFromLine(TextBox t, string colour)
         {
             try
@@ -1130,8 +1288,7 @@ namespace pr_image_generator
         #endregion
 
 
-
-
+        
 
 
         #region COMMON
@@ -1144,8 +1301,14 @@ namespace pr_image_generator
 
 
 
-        //if there are no special things to take care of when a field is updated, we can use this generic function, which just updates the PR object and updates the previews
-        //most TextBox controls will cause this method to be run when they lose focus
+     
+        /// <summary>
+        /// Updates the PR image with newly specified information.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <remarks>This method can be set as the callback for "generic" UI elements that simply need to update the 
+        /// PRImage with new information, without affecting any other UI elements.</remarks>
         private void generic_Leave(object sender, EventArgs e)
         {
             updatePRImage();
@@ -1153,7 +1316,12 @@ namespace pr_image_generator
         }
 
 
-        //open file dialog so that user can choose where to save the image
+       
+        /// <summary>
+        /// Opens Save File dialog to allow the user to specify a save location.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonBrowseSave_Click(object sender, EventArgs e)
         {
             DialogResult result = saveFileDialog.ShowDialog();
@@ -1167,8 +1335,12 @@ namespace pr_image_generator
             }
         }
 
-
-        //call drawPR method of PRImage class to actually generate the image
+    
+        /// <summary>
+        /// Cues the PRImage to actually generate the image, and saves the result in the specified location.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
             string save = textSaveHeaderTab.Text; // note: could use Save text in any of the tabs, since it should be mirrored
@@ -1189,8 +1361,12 @@ namespace pr_image_generator
         }
 
 
-        //ensures that PRImage state variable is completely in sync with the form controls
-        //typically called before generating an image (whether it is for actual generation or for previews)
+      
+        /// <summary>
+        /// Synchronizes the internal PRImage state with the information specified in the controls.
+        /// </summary>
+        /// <remarks>This can be called after anything changes in the UI, and should also be called 
+        /// just before generating the actual image.</remarks>
         private void updatePRImage()
         {
             pr.setGame(textGame.Text);
